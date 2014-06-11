@@ -1,7 +1,7 @@
-Google Analitics Proxy
+Google Analytics Proxy
 =========
 
-[ga-proxy] a little (but handy!) service, that abstract the google api oauth autentication so other tools can use the [google analitics api] directly, without worring about that stuff.
+[ga-proxy] a little (but handy!) service, that abstract the google api oauth autentication so other tools can use the [google analytics api] directly, without worring about that stuff.
 
 Instalation
 --
@@ -34,7 +34,7 @@ You will need the app credentials. In the config directory, create a file (or ju
 ```
 
 
-With this information in place, when you start the service and load the url in the browser, it will redirect to google autentication, to gain offline access to query google analitics.
+With this information in place, when you start the service and load the url in the browser, it will redirect to google autentication, to gain offline access to query google analytics.
 
 This process will ask for readonly permision and save the access token for future reference. The token is valid just for 1 hour, when this happends, the refresh token will be used to get a new token automatically, so you just need to give permission ones.
 
@@ -53,10 +53,10 @@ Load the url in your browser. As no previous permission was granted, it will ask
 
 After that, the browser will show a small, simple and ugly test web console.
 
-The *Accounts* section, will show you the account name, property, and the first 2 profiles of your account. The profile id, in bold, is the one you need to query the [google analitics api].
+The *Accounts* section, will show you the account name, property, and the first 2 profiles of your account. The profile id, in bold, is the one you need to query the [google analytics api].
 ![Accounts][accounts]
 
-The *Test* section, will let you do some basic queries to the [google analitics api].
+The *Test* section, will let you do some basic queries to the [google analytics api].
 ![Test Web Console][test_console]
 
 **Curl example:**
@@ -126,7 +126,7 @@ Feel free to give any feedback!
 
 [ga proxy]:http://killfill.github.io/ga-proxy/
 [create an app]:https://console.developers.google.com/project/194565570790/apiui/credential?authuser=0
-[google analitics api]:https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters
+[google analytics api]:https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters
 [My twitter]: https://twitter.com/killfil
 
 [google_api_credentials]: https://raw.github.com/killfill/ga-proxy/master/images/google_api_credentials.png
