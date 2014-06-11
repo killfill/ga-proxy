@@ -1,0 +1,15 @@
+{
+  "name": "public",
+  "version": "0.0.0",
+  "authors": [
+    "Phillip Neumann <pneumann@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular-cookies": "~1.2.15",
+    "angular": "~1.2.15",
+    "angular-route": "~1.2.15",
+    "angular-resource": "~1.2.15"
+  }
+}

@@ -1,0 +1,19 @@
+<h5>Username: {{res.username}}</h5>
+
+<section ng-repeat='item in res.items'>
+	<h4>Account name: {{item.name}}</h4>
+	<table border=1>
+		<tr>
+			<th>Propery name</th>
+			<th>Propery id</th>
+			<td>Profile 1</td>
+			<td>Profile 2</td>
+		</tr>
+		<tr ng-repeat="prop in item.webProperties |orderBy:'id'" ng-show='prop.profiles[0]'>
+			<td>{{prop.name}}</td>
+			<td>{{prop.id}}</td>
+			<td><strong>{{prop.profiles[0].id}}</strong> <small>{{prop.profiles[0].name}}</small></td>
+			<td><strong>{{prop.profiles[1].id}}</strong> <small>{{prop.profiles[1].name}}</small></td>
+		</tr>
+	</table>
+</section>

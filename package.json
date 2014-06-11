@@ -1,0 +1,11 @@
+{
+  "author": "@killfil",
+  "name": "ga-proxy",
+  "version": "0.5.0",
+  "dependencies": {
+    "oauth": "~0.9.7",
+    "restify": "~2.7.0",
+    "bunyan": "~0.22.1"
+  },
+  "devDependencies": {}
+}

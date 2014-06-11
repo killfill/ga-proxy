@@ -1,0 +1,15 @@
+<div>TOTAL: {{res.totalResults | number}}</div>
+<div>ROWS: {{res.rows.length | number}}</div>
+
+<table border=1 ng-show='res.totalResults'>
+	<tr>
+		<th ng-repeat="col in res.columnHeaders">{{col.name}}</th>
+	</tr>
+
+	<tr ng-repeat="row in res.rows"> 
+		<td ng-repeat="r in row">{{r}}</td>
+	</tr>
+</table>
+
+<hr/>
+<!-- {{res | json}} -->

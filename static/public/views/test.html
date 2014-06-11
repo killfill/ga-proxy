@@ -1,0 +1,100 @@
+
+<div>
+	Profile
+	<select ng-model='selectedProfile', ng-options="'[' + profile.account + ' ' + profile.propId + '] ' + profile.name + ' ' + profile.id for profile in profiles">
+	</select>
+</div>
+
+
+<div>
+	Metric
+	<select ng-model='selectedMetric', ng-options="metric.attributes.group + ': ' + metric.attributes.uiName for metric in metrics"></select>
+	<table style='margin-left: 80px; border-left: 1px dashed'>
+		<tr ng-repeat='m in selectedMetrics'>
+			<td><span ng-click="deleteMetric($index)">[x]</span></td>
+			<td style='white-space: nowrap'><strong>{{m.attributes.uiName}}</strong></td>
+			<td>{{m.id}}</td>
+			<td style='white-space: nowrap'>{{m.attributes.calculation}}</td>
+			<td><small>{{m.attributes.description}}</small></td>
+		</tr>
+	</table>
+</div>
+<div>
+	Dimensions
+	<select ng-model='selectedDimension', ng-options="dim.attributes.group + ': ' + dim.attributes.uiName for dim in dimensions"></select>
+	<table style='margin-left: 80px; border-left: 1px dashed'>
+		<tr ng-repeat='m in selectedDimensions'>
+			<td><span ng-click="deleteDimension($index)">[x]</span></td>
+			<td style='white-space: nowrap'><strong>{{m.attributes.uiName}}</strong></td>
+			<td>{{m.id}}</td>
+			<td style='white-space: nowrap'>{{m.attributes.calculation}}</td>
+			<td><small>{{m.attributes.description}}</small></td>
+		</tr>
+	</table>
+</div>
+<div>
+	Dates
+	<input ng-model='startDate'>
+	<input ng-model='endDate'>
+</div>
+<div>
+	Sort
+	<input ng-model='sort' style='width: 300px'>
+</div>
+<div>
+	Starting from index
+	<input ng-model='startFrom'>
+	Max results (page size)
+	<input ng-model='maxResults'>
+</div>
+
+<div>
+	Filters
+	<input ng-model='filters'>
+</div>
+
+<button ng-if='selectedProfile && selectedMetrics.length && selectedDimensions.length' ng-click='go()'>Go!</button>
+
+<hr/>
+
+<div ng-if='error'>
+	ERROR
+	<pre>{{error|json}}</pre>
+</div>
+
+<div ng-if='res.itemsPerPage'>
+
+	<div>
+		Total:  {{res.totalResults | number}} 
+		Pages: {{totalPages | number}}
+		Start index: {{res.query['start-index'] | number}}
+		Max results (page size): {{res.query['max-results'] | number}}
+	</div>
+	<table border=1>
+		<tr>
+			<th ng-repeat='col in res.columnHeaders'>{{col.name}} ({{col.columnType[0]}} {{col.dataType}})</th>
+		</tr>
+		<tr ng-repeat='row in res.rows'>
+			<td ng-repeat='cel in row'>{{cel}}</td>
+		</tr>
+	</table>
+<!-- 
+	<div>
+		Columns
+		<pre>{{res.columnHeaders|json}}</pre>
+	</div>
+	<div>
+		Data
+		<pre>{{res.rows|json}}</pre>
+	</div>
+ -->
+	<div>
+		Totals
+		<pre>{{res.totalsForAllResults}}</pre>
+	</div>
+
+	Request info:
+	<pre>{{res.query | json}}</pre>
+	<pre>{{res.id}}</pre>
+
+</div>

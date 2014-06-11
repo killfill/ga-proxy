@@ -1,0 +1,6 @@
+{
+	"port": 5005,
+	"google_cb": "http://localhost:5005/auth/google/return",
+	"google_clientid": "194565570790-bfqh7u9npef5u4nj6tfeji13f9is85m3.apps.googleusercontent.com",
+	"google_password": "0HgceDBUgb3zwT_WmrbMF1dF"
+}
