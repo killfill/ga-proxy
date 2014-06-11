@@ -32,9 +32,9 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="google-analitics-proxy" class="anchor" href="#google-analitics-proxy"><span class="octicon octicon-link"></span></a>Google Analitics Proxy</h1>
+<a name="google-analytics-proxy" class="anchor" href="#google-analytics-proxy"><span class="octicon octicon-link"></span></a>Google Analytics Proxy</h1>
 
-<p>This is a little (but handy!) service, that abstract the google api oauth autentication so other tools can use the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analitics api</a> directly, without worring about that stuff.</p>
+<p>This is a little (but handy!) service, that abstract the google api oauth autentication so other tools can use the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analytics api</a> directly, without worring about that stuff.</p>
 
 <h2>
 <a name="instalation" class="anchor" href="#instalation"><span class="octicon octicon-link"></span></a>Instalation</h2>
@@ -63,7 +63,7 @@ bower install
 }
 </code></pre>
 
-<p>With this information in place, when you start the service and load the url in the browser, it will redirect to google autentication, to gain offline access to query google analitics.</p>
+<p>With this information in place, when you start the service and load the url in the browser, it will redirect to google autentication, to gain offline access to query google analytics.</p>
 
 <p>This process will ask for readonly permision and save the access token for future reference. The token is valid just for 1 hour, when this happends, the refresh token will be used to get a new token automatically, so you just need to give permission ones.</p>
 
@@ -82,10 +82,10 @@ bower install
 
 <p>After that, the browser will show a small, simple and ugly test web console.</p>
 
-<p>The <em>Accounts</em> section, will show you the account name, property, and the first 2 profiles of your account. The profile id, in bold, is the one you need to query the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analitics api</a>.
+<p>The <em>Accounts</em> section, will show you the account name, property, and the first 2 profiles of your account. The profile id, in bold, is the one you need to query the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analytics api</a>.
 <img src="https://raw.github.com/killfill/ga-proxy/master/images/accounts.png" alt="Accounts"></p>
 
-<p>The <em>Test</em> section, will let you do some basic queries to the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analitics api</a>.
+<p>The <em>Test</em> section, will let you do some basic queries to the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analytics api</a>.
 <img src="https://raw.github.com/killfill/ga-proxy/master/images/test_console.png" alt="Test Web Console"></p>
 
 <p><strong>Curl example:</strong></p>
