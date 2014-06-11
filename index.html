@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ga-proxy : Google Analytics proxy that lets you use the ga api without worring about oauth autentication" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ga-proxy</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/killfill/ga-proxy">View on GitHub</a>
+
+          <h1 id="project_title">Ga-proxy</h1>
+          <h2 id="project_tagline">Google Analytics proxy that lets you use the ga api without worring about oauth autentication</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/killfill/ga-proxy/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/killfill/ga-proxy/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="google-analitics-proxy" class="anchor" href="#google-analitics-proxy"><span class="octicon octicon-link"></span></a>Google Analitics Proxy</h1>
+
+<p>This is a little (but handy!) service, that abstract the google api oauth autentication so other tools can use the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analitics api</a> directly, without worring about that stuff.</p>
+
+<h2>
+<a name="instalation" class="anchor" href="#instalation"><span class="octicon octicon-link"></span></a>Instalation</h2>
+
+<pre><code>git clone https://github.com/killfill/ga-proxy.git
+cd ga-proxy
+npm install
+cd static/public
+bower install
+</code></pre>
+
+<h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p><a href="https://console.developers.google.com/project/194565570790/apiui/credential?authuser=0">Create an app</a> in your google account, like this:</p>
+
+<p><img src="https://raw.github.com/killfill/ga-proxy/master/images/google_api_credentials.png" alt="Google account screenshot"></p>
+
+<p>You will need the app credentials. In the config directory, create a file (or just use the development one) like this:</p>
+
+<pre><code>{
+    "port": 5005,
+    "google_cb": "http://localhost:5005/auth/google/return",
+    "google_clientid": "194565570790-bfqh7u9npef5u4nj6tfeji13f9is85m3.apps.googleusercontent.com",
+    "google_password": "0HgceDBUgb3zwT_WmrbMF1dF"
+}
+</code></pre>
+
+<p>With this information in place, when you start the service and load the url in the browser, it will redirect to google autentication, to gain offline access to query google analitics.</p>
+
+<p>This process will ask for readonly permision and save the access token for future reference. The token is valid just for 1 hour, when this happends, the refresh token will be used to get a new token automatically, so you just need to give permission ones.</p>
+
+<p>This information will be saved in a file in /tmp/memory.json. </p>
+
+<p><strong>WARN</strong>: Do not make that file public!</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Start the service with :
+<code>ENV=conf_file_name node index.js</code> (if not ENV specified, development will be used).</p>
+
+<p>Load the url in your browser. As no previous permission was granted, it will ask you to:
+<img src="https://raw.github.com/killfill/ga-proxy/master/images/ask_permission.png" alt="Ask permission"></p>
+
+<p>After that, the browser will show a small, simple and ugly test web console.</p>
+
+<p>The <em>Accounts</em> section, will show you the account name, property, and the first 2 profiles of your account. The profile id, in bold, is the one you need to query the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analitics api</a>.
+<img src="https://raw.github.com/killfill/ga-proxy/master/images/accounts.png" alt="Accounts"></p>
+
+<p>The <em>Test</em> section, will let you do some basic queries to the <a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters">google analitics api</a>.
+<img src="https://raw.github.com/killfill/ga-proxy/master/images/test_console.png" alt="Test Web Console"></p>
+
+<p><strong>Curl example:</strong></p>
+
+<pre><code>$ curl 'http://localhost:5005/google/data/ga?dimensions=ga:date&amp;metrics=ga:pageviews&amp;start-date=yesterday&amp;end-date=today&amp;ids=ga:471079'|json
+
+{
+  "kind": "analytics#gaData",
+  "id": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:471079&amp;dimensions=ga:date&amp;metrics=ga:pageviews&amp;start-date=yesterday&amp;end-date=today",
+  "query": {
+    "start-date": "yesterday",
+    "end-date": "today",
+    "ids": "ga:471079",
+    "dimensions": "ga:date",
+    "metrics": [
+      "ga:pageviews"
+    ],
+    "start-index": 1,
+    "max-results": 1000
+  },
+  "itemsPerPage": 1000,
+  "totalResults": 2,
+  "selfLink": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:471079&amp;dimensions=ga:date&amp;metrics=ga:pageviews&amp;start-date=yesterday&amp;end-date=today",
+  "profileInfo": {
+    "profileId": "471079",
+    "accountId": "305150",
+    "webPropertyId": "UA-305150-1",
+    "internalWebPropertyId": "500602",
+    "profileName": "www.fayerwayer.com",
+    "tableId": "ga:471079"
+  },
+  "containsSampledData": false,
+  "columnHeaders": [
+    {
+      "name": "ga:date",
+      "columnType": "DIMENSION",
+      "dataType": "STRING"
+    },
+    {
+      "name": "ga:pageviews",
+      "columnType": "METRIC",
+      "dataType": "INTEGER"
+    }
+  ],
+  "totalsForAllResults": {
+    "ga:pageviews": "159371"
+  },
+  "rows": [
+    [
+      "20140610",
+      "113419"
+    ],
+    [
+      "20140611",
+      "45952"
+    ]
+  ]
+}
+</code></pre>
+
+<h1>
+<a name="feedback" class="anchor" href="#feedback"><span class="octicon octicon-link"></span></a>Feedback</h1>
+
+<p>Feel free to give any feedback!
+<a href="https://twitter.com/killfil">My twitter</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ga-proxy maintained by <a href="https://github.com/killfill">killfill</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-51835966-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
