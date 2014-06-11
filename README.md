@@ -1,7 +1,7 @@
 Google Analitics Proxy
 =========
 
-This is a little (but handy!) service, that abstract the google api oauth autentication so other tools can use the [google analitics api] directly, without worring about that stuff.
+[ga-proxy] a little (but handy!) service, that abstract the google api oauth autentication so other tools can use the [google analitics api] directly, without worring about that stuff.
 
 Instalation
 --
@@ -43,7 +43,7 @@ This information will be saved in a file in /tmp/memory.json.
 **WARN**: Do not make that file public!
 
 Usage
-==
+--
 
 Start the service with :
 ``` ENV=conf_file_name node index.js ``` (if not ENV specified, development will be used).
@@ -124,7 +124,7 @@ Feel free to give any feedback!
 [My twitter]
 
 
-
+[ga proxy]:http://killfill.github.io/ga-proxy/
 [create an app]:https://console.developers.google.com/project/194565570790/apiui/credential?authuser=0
 [google analitics api]:https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=es#filters
 [My twitter]: https://twitter.com/killfil
